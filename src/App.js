@@ -1,69 +1,18 @@
 import React from 'react';
 
 // redux
-import { createStore, combineReducers, bindActionCreators } from 'redux';
+import { createStore } from 'redux';
 // redux-devtools
 import { composeWithDevTools } from 'redux-devtools-extension'
+// główny reducer
+import rootReducer from './reducers';
 
+import { movieActions } from './app/movies/duck'
 
-const initialMovies = {
-  listName:'Favourite',
-  list: [
-    'Rambo III', 'Hakerzy', 'Matrix'
-  ]
-}
-
-const initialActors = {
-  listName: 'Best',
-  list: [
-    'Tom Hanks', 'Julia Roberts', 'Angelina Jolie'
-  ]
-}
-
-function movies(state = initialMovies, action){
-  switch(action.type){
-    case 'ADD_MOVIE':
-      return{
-        ...state, list:[...state.list, action.item]
-      }
-    case 'RESET_MOVIES':
-      return {
-        ...state, list: []
-      }
-
-    default: 
-    return state
-  }
-}
-
-function actors(state = initialActors, action){
-  switch(action.type){
-    case 'ADD_ACTOR':
-      return{
-        ...state, list:[...state.list, action.item]
-      }
-    case 'RESET_ACTORS':
-      return {
-        ...state, list: []
-      }
-    default: 
-      return state
-  }
-}
-
-const allReducers = combineReducers({movies, actors})
-const store = createStore(allReducers, composeWithDevTools());
-
-// Dodawanie nowego aktora
-const addActor = item => ({type: 'ADD_ACTOR', item});
-const resetActors = item => ({type: 'RESET_ACTORS', item})
-store.dispatch(addActor('Cezary Pazura'))
-
-const actorsActions = bindActionCreators({add: addActor, resetActors}, store.dispatch)
-actorsActions.add('Jan Frycz')
-actorsActions.resetActors()
-
+const store = createStore(rootReducer,composeWithDevTools());
 window.store = store
+
+store.dispatch(movieActions.add('Rambo V'));
 
 class App extends React.Component {
   render(){

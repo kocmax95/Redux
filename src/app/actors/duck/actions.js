@@ -1,11 +1,11 @@
 import types from './types'
 
 
-const addActor = item => ({
+const add = item => ({
     type: types.ADD_ACTOR, item
 });
 
-const resetActors = item => ({
+const reset = item => ({
     type: types.RESET_ACTORS, item
 });
 
