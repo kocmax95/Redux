@@ -9,6 +9,9 @@ import rootReducer from './reducers';
 
 import { movieActions } from './app/movies/duck'
 
+import Menu from './app/menu/Menu'
+import {Provider} from 'react-redux'
+
 const store = createStore(rootReducer,composeWithDevTools());
 window.store = store
 
@@ -17,9 +20,9 @@ store.dispatch(movieActions.add('Rambo V'));
 class App extends React.Component {
   render(){
   return (
-    <React.Fragment>
-
-    </React.Fragment>
+    <Provider store={store}>
+      <Menu/>
+    </Provider>
   );
   }
 }
