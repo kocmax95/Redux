@@ -1,5 +1,4 @@
 import React from 'react';
-
 // redux
 import { createStore } from 'redux';
 // redux-devtools
